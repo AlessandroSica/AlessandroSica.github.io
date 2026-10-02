@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alessandro Sica</title>
+  <meta name="description" content="Alessandro Sica — personal website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div id="ships-far" class="ships" aria-hidden="true"></div>
+  <nav id="planets" aria-label="Sections"></nav>
+  <div id="ships-near" class="ships" aria-hidden="true"></div>
+  <div id="hero" class="layer" aria-hidden="true">
+    <img id="astronaut" class="pixel" src="assets/astronaut.png" alt="">
+    <canvas id="name" class="pixel"></canvas>
+  </div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <h1 class="sr-only">Alessandro Sica</h1>
+  <script src="planets.js"></script>
+  <script src="ships.js"></script>
+  <script src="sections.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

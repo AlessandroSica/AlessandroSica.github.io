@@ -1,0 +1,627 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #07041a;
+}
+
+html { cursor: crosshair; }
+
+.pixel {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* moved with sub-pixel transforms from main.js so motion stays smooth */
+#space, .layer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  will-change: transform;
+  pointer-events: none;
+}
+
+#space {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#astronaut {
+  display: block;
+  will-change: transform;
+}
+
+/* ---------- section planets ---------- */
+
+#planets {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.planet-body {
+  position: relative;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.planet-body:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px var(--accent));
+}
+
+.planet-canvas {
+  position: absolute;
+  z-index: 2;
+}
+
+.moon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.planet-label {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: calc(var(--planet-px, 3px) * 4);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(9px, 0.95vw, 14px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: pre;
+  color: var(--accent);
+  text-shadow:
+    0 0 4px var(--accent),
+    0 0 12px var(--accent),
+    2px 2px 0 #0b0618;
+  transition: color 0.3s ease;
+}
+
+.planet-body:hover + .planet-label {
+  color: #fff;
+}
+
+/* ---------- passing spaceships ---------- */
+
+.ships {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ship {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+/* faint CRT scanlines, one dark line every 2 "pixels" */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) calc(var(--px, 4px) * 1),
+    rgba(0, 0, 0, 0.18) calc(var(--px, 4px) * 1),
+    rgba(0, 0, 0, 0.18) calc(var(--px, 4px) * 2)
+  );
+  mix-blend-mode: multiply;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ======================================================================
+   Section pages (opened by clicking a planet)
+   ====================================================================== */
+
+.section {
+  --accent: #4ff0ff;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.85) 1px, transparent 1.6px) 0 0 / 97px 89px,
+    radial-gradient(circle, color-mix(in srgb, var(--accent) 80%, white) 1px, transparent 1.6px) 40px 30px / 151px 137px,
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--accent) 30%, #07041a) 0%, #0a0620 55%, #05030f 100%);
+  clip-path: circle(0px at var(--cx, 50%) var(--cy, 50%));
+  transition: clip-path 0.65s steps(14);
+}
+
+.section.open {
+  clip-path: circle(160vmax at var(--cx, 50%) var(--cy, 50%));
+}
+
+.section[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section { transition: none; }
+}
+
+.section-planet {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.section-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floater {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 8px var(--accent));
+  will-change: transform;
+}
+
+.section-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: 'VT323', monospace;
+  color: #e8e4f8;
+}
+
+.section-header {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1 1 420px;
+}
+
+.section-icon {
+  filter: drop-shadow(0 0 10px var(--accent));
+  flex: none;
+}
+
+.section-title {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(18px, 3vw, 34px);
+  line-height: 1.3;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-shadow: 0 0 6px var(--accent), 0 0 18px var(--accent), 3px 3px 0 #0b0618;
+}
+
+.section-pop {
+  margin: 8px 0 0;
+  font-size: 22px;
+  color: #cfc8e8;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* chunky pixel button with notched corners */
+.pixel-btn {
+  display: inline-block;
+  margin: 4px;
+  padding: 10px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: #1a1033;
+  border: 0;
+  cursor: pointer;
+  box-shadow:
+    0 -4px 0 0 var(--accent), 0 4px 0 0 var(--accent),
+    -4px 0 0 0 var(--accent), 4px 0 0 0 var(--accent);
+  transition: background 0.15s steps(2), color 0.15s steps(2);
+}
+
+.pixel-btn:hover,
+.pixel-btn:focus-visible {
+  background: var(--accent);
+  color: #0b0618;
+  outline: none;
+}
+
+.pixel-btn.placeholder {
+  --accent: #6b6385;
+  color: #a8a0c8;
+  cursor: help;
+}
+
+.pixel-btn.placeholder::after { content: ' *'; }
+
+.section-content {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 90px 24px 34vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr));
+  gap: 96px 44px;
+  align-items: start;
+}
+
+.section-footer {
+  position: relative;
+  text-shadow: 0 2px 0 #0b0618, 0 0 8px #0b0618;
+  text-align: center;
+  font-size: 20px;
+  color: #8d85ad;
+  padding: 0 0 40px;
+}
+
+/* ---------- panels ---------- */
+
+.card {
+  position: relative;
+  padding: 22px 24px 24px;
+  background: rgba(12, 7, 32, 0.92);
+  font-size: 22px;
+  line-height: 1.22;
+  box-shadow:
+    0 -4px 0 0 var(--accent), 0 4px 0 0 var(--accent),
+    -4px 0 0 0 var(--accent), 4px 0 0 0 var(--accent),
+    0 0 26px -4px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.card.wide { grid-column: 1 / -1; }
+
+.card h3 {
+  margin: 0 0 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #fff;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.card-titles { flex: 1; }
+
+.card-sub {
+  margin: 0;
+  color: #b9b2d8;
+}
+
+.card-meta {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.card-logo.placeholder {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+  color: #8d85ad;
+  border: 3px dashed #6b6385;
+}
+
+.card-logo {
+  flex: none;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(152px, 100%);
+  max-height: 72px;
+}
+
+/* logos that come on their own tile get the same stepped pixel frame as the panels */
+.card-logo.framed {
+  margin: 3px;
+  box-shadow:
+    0 -3px 0 0 var(--accent), 0 3px 0 0 var(--accent),
+    -3px 0 0 0 var(--accent), 3px 0 0 0 var(--accent);
+}
+
+.card-medal { flex: none; }
+
+.card-media.placeholder {
+  margin: 16px 0 4px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  line-height: 2;
+  color: #8d85ad;
+  border: 3px dashed #6b6385;
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 10px, transparent 10px 20px);
+}
+
+.card-media small {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+}
+
+.card ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 9px;
+}
+
+.card li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.42em;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+}
+
+/* facts the creatures talk about */
+.card mark {
+  background: transparent;
+  color: var(--accent);
+  border-bottom: 2px dotted var(--accent);
+  transition: background 0.2s steps(2), color 0.2s steps(2);
+}
+
+.card mark.pulse {
+  background: var(--accent);
+  color: #0b0618;
+  box-shadow: 0 0 14px var(--accent);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.tag {
+  padding: 2px 10px;
+  font-size: 19px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow:
+    0 -2px 0 0 var(--accent), 0 2px 0 0 var(--accent),
+    -2px 0 0 0 var(--accent), 2px 0 0 0 var(--accent);
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* bar chart */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding-top: 64px;
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-value {
+  padding: 4px 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: #0b0618;
+  background: #fff;
+}
+
+.bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10px;
+  width: 100%;
+  max-width: 96px;
+  background: repeating-linear-gradient(0deg, var(--accent) 0 8px, color-mix(in srgb, var(--accent) 70%, #0b0618) 8px 16px);
+  box-shadow: 0 0 16px -2px var(--accent);
+}
+
+.bar-label {
+  text-align: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.bar-label small { color: var(--accent); font-size: 17px; }
+
+/* skills */
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px 30px;
+  margin-top: 18px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 70px;
+  font-size: 21px;
+}
+
+.skill-logo { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 70%, transparent)); }
+
+.text-logo {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: #0b0618;
+  background: var(--accent);
+  box-shadow:
+    0 -4px 0 0 #0b0618, 0 4px 0 0 #0b0618,
+    -4px 0 0 0 #0b0618, 4px 0 0 0 #0b0618;
+}
+
+/* research simulation */
+.nav-sim {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 14px;
+  box-shadow: 0 0 0 3px #0b0618;
+}
+
+.sim-legend {
+  margin: 12px 0 0;
+  font-size: 19px;
+  color: #cfc8e8;
+}
+
+.sim-legend .key {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  vertical-align: -1px;
+}
+
+.key.rigid { background: #8a90a0; }
+.key.soft { background: #5aa83a; }
+.key.path { background: #ff4fe1; }
+.key.base { background: #9aa3b5; }
+
+/* ---------- creatures ---------- */
+
+.creature-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.creature {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.45));
+}
+
+.creature canvas { display: block; }
+
+.bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  padding: 7px 9px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: #0b0618;
+  background: #fff;
+  box-shadow:
+    0 -3px 0 0 #0b0618, 0 3px 0 0 #0b0618,
+    -3px 0 0 0 #0b0618, 3px 0 0 0 #0b0618;
+  transform: translate(-50%, -10px) scale(0);
+  transform-origin: 50% 100%;
+  transition: transform 0.18s steps(3);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 6px;
+  height: 6px;
+  margin: 3px 0 0 -3px;
+  background: #fff;
+  box-shadow: 3px 0 0 #0b0618, -3px 0 0 #0b0618, 0 3px 0 #0b0618;
+}
+
+.bubble.show { transform: translate(-50%, -12px) scale(1); }
+
+@media (max-width: 700px) {
+  .section-header { padding-top: 18px; }
+  .card { font-size: 20px; padding: 18px; }
+  .card-head { flex-wrap: wrap; }
+  .card-meta { text-align: left; }
+  .section-content { gap: 84px 0; padding-top: 80px; }
+}
