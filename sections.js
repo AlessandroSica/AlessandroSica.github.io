@@ -138,8 +138,15 @@
     education: {
       population: { kind: 'owl', name: 'scholar owls', count: 1204 },
       floaters: ['temple', 'book', 'book', 'medalGold'],
-      quips: ['Hoo! Study time', 'Control Systems!', 'Mechatronics!'],
+      quips: ['Hoo! Study time', 'Control Systems!', 'Mechatronics!', 'Grüezi, ETH!'],
       blocks: [
+        {
+          type: 'card', wide: true,
+          logo: 'ETH logo',
+          title: 'ETH Zürich',
+          sub: 'MSc Robotics, Systems and Control',
+          date: 'Sep 2026 – Present', place: 'Zürich, Switzerland',
+        },
         {
           type: 'card', wide: true,
           logo: 'UoM logo',
