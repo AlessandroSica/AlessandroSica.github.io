@@ -16,6 +16,7 @@
   // organisation logos, cropped and cleaned from images/ into assets/logos/.
   // framed: logos that sit on their own tile rather than as a free shape
   const ORG_LOGOS = {
+    'ETH logo': { src: 'eth', framed: true },
     'UoM logo': { src: 'uom', framed: true },
     'RoboSoc logo': { src: 'robosoc' },
     'PASS logo': { src: 'pass' },
