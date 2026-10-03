@@ -138,7 +138,7 @@
     education: {
       population: { kind: 'owl', name: 'scholar owls', count: 1204 },
       floaters: ['temple', 'book', 'book', 'medalGold'],
-      quips: ['Hoo! Study time', 'Control Systems!', 'Mechatronics!', 'Grüezi, ETH!'],
+      quips: ['Hoo! Study time', 'Control Systems!', 'Mechatronics!', 'Grüezi, ETH!', 'MPC time!'],
       blocks: [
         {
           type: 'card', wide: true,
@@ -146,6 +146,11 @@
           title: 'ETH Zürich',
           sub: 'MSc Robotics, Systems and Control',
           date: 'Sep 2026 – Present', place: 'Zürich, Switzerland',
+          bullets: [
+            'Currently pursuing the {{MSc in Robotics, Systems and Control|Master at ETH!}}.',
+            'Courses this semester:',
+          ],
+          tags: ['Real World Robotics', 'Advanced Machine Learning', 'Model Predictive Control', 'Robot Dynamics'],
         },
         {
           type: 'card', wide: true,
