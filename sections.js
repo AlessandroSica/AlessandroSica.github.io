@@ -454,7 +454,6 @@
       const img = h('img', 'card-media' + (b.media.fit ? ' fit' : ''));
       img.src = `assets/media/${b.media.src}`;
       img.alt = b.media.alt;
-      img.loading = 'lazy';
       card.appendChild(img);
     } else if (b.media) card.appendChild(h('div', 'card-media placeholder', `IMAGE PLACEHOLDER<br><small>${esc(b.media)}</small>`));
 
