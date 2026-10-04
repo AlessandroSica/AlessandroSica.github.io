@@ -198,8 +198,20 @@
       quips: ['Take me to your PCB', 'Ship it!', 'Beep beep'],
       blocks: [
         {
+          type: 'card', wide: true,
+          title: 'Robot Bartender',
+          sub: 'Hacklab weekend hackathon, team of 4',
+          date: 'Sep 2026', place: 'Hacklab',
+          media: { video: 'robot-bartender.mp4', poster: 'robot-bartender.jpg', small: true, alt: 'A UR5 arm mixing a drink ordered through Spectacles smart glasses' },
+          bullets: [
+            'Built an {{automated bartender|One drink, coming up!}} over a weekend: order through {{Snap Spectacles|Order with your glasses!}}, ElevenLabs voice, VLM reasoning and an intent classifier, then a {{Universal Robots UR5|The UR5 pours!}} makes the drink.',
+            'My part: {{VLM setup|Qwen sees the bar}}, data selection, the {{labeling pipeline|Label all the bottles!}}, and {{fine-tuning Qwen models|Fine-tuned on NVIDIA!}} on NVIDIA GPUs.',
+          ],
+          tags: ['Python', 'Qwen3-VL', 'ROS 2', 'UR5', 'Spectacles'],
+          links: [{ label: 'GitHub', href: 'https://github.com/UR5-AlienBazaar/vlm' }],
+        },
+        {
           type: 'card',
-          logo: 'Hackathon logo',
           title: 'Weight-Sensing Pick-and-Place Robot',
           sub: 'Intel Industrial Robotics Arm Challenge, EUROPE EMBODIED Hackathon',
           date: 'Jun 2026', place: 'Munich, Germany',
@@ -213,17 +225,16 @@
         },
         {
           type: 'card',
-          logo: 'Buggy photo',
           title: 'Embedded Systems Project',
           sub: 'BEng Mechatronic Engineering, The University of Manchester',
           date: 'Sep 2024 – May 2025', place: 'Manchester, UK',
-          media: 'Photo of the line-following buggy',
+          media: { video: 'buggy-race.mp4', poster: 'buggy-race.jpg', loop: true, alt: 'The line-following buggy racing around the track' },
           bullets: [
             'Developed a {{line-following buggy|Follow that line!}} with custom chassis, {{PCB design|We made a PCB!}} and an infrared sensor array, programmed in C++ on an {{STM32|STM32 go brrr}} microcontroller with {{PID control|PID tuned!}} for steering and speed regulation.',
             'Individual Score: {{95/100|95 out of 100!}}, {{highest overall for the 2024/2025 cohort|Highest in the cohort!}}.',
           ],
           tags: ['C++', 'STM32', 'PCB design', 'PID control'],
-          links: [{ label: 'GitHub', href: null }, { label: 'Race video', href: null }],
+          links: [{ label: 'GitHub', href: null }],
         },
       ],
     },
@@ -450,7 +461,18 @@
     if (b.date) head.appendChild(h('div', 'card-meta', `${esc(b.date)}<br>${esc(b.place || '')}`));
     card.appendChild(head);
 
-    if (b.media && b.media.src) {
+    if (b.media && b.media.video) {
+      const v = h('video', 'card-media' + (b.media.small ? ' small' : '') + (b.media.loop ? ' clip' : ''));
+      v.src = `assets/media/${b.media.video}`;
+      v.poster = `assets/media/${b.media.poster}`;
+      v.setAttribute('aria-label', b.media.alt);
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = 'metadata';
+      // short clips loop silently like a gif; longer videos wait for play
+      if (b.media.loop) { v.muted = true; v.loop = true; v.autoplay = true; }
+      card.appendChild(v);
+    } else if (b.media && b.media.src) {
       const img = h('img', 'card-media' + (b.media.fit ? ' fit' : '') + (b.media.small ? ' small' : ''));
       img.src = `assets/media/${b.media.src}`;
       img.alt = b.media.alt;
