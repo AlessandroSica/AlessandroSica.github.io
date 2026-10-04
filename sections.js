@@ -163,7 +163,7 @@
             '{{Final Bachelor Score: 81/100|81 out of 100!}}, {{First Class Honours|First Class Honours!}}.',
             '3rd Year Average: 80/100, First Class Honours, {{top 4% of the cohort|Top 4% again!}}.',
             '2nd Year Average: 84/100, First Class Honours, {{top 5% of the cohort|Top 5%!}}.',
-            '1st Year Average: {{92/100|92 in year one?!}}, First Class Honours, top 4% of the cohort.',
+            '1st Year Average: {{92/100|92 in year one?!}}, First Class Honours, {{top 2% of the cohort|Top 2%!}}.',
           ],
         },
         {
@@ -289,8 +289,7 @@
           date: 'Jun 2025 – Jun 2026', place: 'Manchester, UK',
           bullets: [
             'Leading {{UoM’s largest society|Biggest society!}}, managing a {{20-person committee|20 on the committee!}}, scaling membership to {{600|600 members!}} and making it one of the UK’s largest societies, while overseeing {{eight robotics projects|8 projects!}}.',
-            'Managing an annual budget of {{over £10 000|£10k budget!}} for projects, workshops, competitions and events.',
-            'Coordinating {{Hackabot|Hackabot!!}}, the UK’s largest robotics hackathon, with {{350+ participants|350+ hackers!}} and a value exceeding £20 000.',
+            'Coordinating {{Hackabot|Hackabot!!}}, the UK’s largest robotics hackathon, with {{350+ participants|350+ hackers!}} and a value exceeding {{£30 000|£30k event!}}.',
           ],
           links: [{ label: 'Robotics Society', href: 'https://www.uom-robosoc.com/' }, { label: 'Hackabot', href: 'https://hackabot-2026.com/' }],
         },
