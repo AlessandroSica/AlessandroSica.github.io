@@ -203,13 +203,13 @@
           title: 'Weight-Sensing Pick-and-Place Robot',
           sub: 'Intel Industrial Robotics Arm Challenge, EUROPE EMBODIED Hackathon',
           date: 'Jun 2026', place: 'Munich, Germany',
-          media: 'Photo / video of the Franka Panda sorting objects',
+          media: { src: 'pick-and-place.jpg', alt: 'Pipeline of the Franka Panda sorter: global and wrist camera vision, picking, weight estimation from torque sensors, and placing' },
           bullets: [
             'Built with a team of 3 {{in 48 hours|48 hours, no sleep!}}: added weight-estimation-based sorting to a {{Franka Emika Panda|A Franka Panda!}} pick-and-place routine using its own {{joint torque sensors|It weighs with its joints!}} and a custom neural network.',
             'Combined 2D and depth wrist-camera perception for pick refinement with an API-based {{VLM|A VLM sorts on request}} for user-specified sorting, running the {{OpenCV/YOLO|YOLO spotted it!}} pipeline via {{Intel OpenVINO|Low-latency OpenVINO!}} for low-latency inference.',
           ],
           tags: ['Python', 'OpenCV', 'YOLO', 'OpenVINO', 'Franka Panda'],
-          links: [{ label: 'GitHub', href: null }, { label: 'Demo video', href: null }],
+          links: [{ label: 'GitHub', href: null }, { label: 'Demo video', href: 'https://canva.link/hmmscc2khgo3771' }, { label: 'Pitch', href: 'https://canva.link/9svvkagh3xanrok' }],
         },
         {
           type: 'card',
