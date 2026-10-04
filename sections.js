@@ -323,7 +323,7 @@
           title: 'EUROPE EMBODIED Hackathon – 1st Place Overall',
           sub: 'ESRA, RoboTUM, START Munich & TUM International', date: 'Jun 2026', place: 'Munich, Germany',
           bullets: ['Won the {{Intel Industrial Robotics Arm Challenge|Track winners!}} and {{1st place overall|FIRST PLACE!}} with team RoBoost (3 members), out of {{350+ applicants|Beat 350+!}}, earning {{€2000 in cash|€2000!}} and €5000 in Claude credits.'],
-          links: [{ label: 'Announcement', href: null }],
+          links: [{ label: 'Announcement', href: 'https://www.linkedin.com/posts/europe-embodied_hmi2market-eiturbanmobility-eithei-activity-7477254590359310336-mbpZ' }],
         },
         {
           type: 'card', medal: 'medalGold',
