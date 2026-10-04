@@ -365,7 +365,7 @@
             'Simulating {{two coordinated 6-DOF robotic manipulators|Two arms, one rail!}} on rails for automated exchange of plasma guns in a {{digital twin|Digital twin!}} of a {{Plasma-Jet-Driven Magneto-Inertial Fusion|FUSION?!}} (PJMIF) chamber.',
             'Focusing on {{motion coordination|Coordinating...}}, task exchange and {{safe planning|No collisions!}} for arms sharing a workspace.',
           ],
-          media: { src: 'maxrobotics-sim.jpg', alt: 'Simulation of a 6-DOF robotic arm on a rail beside a PJMIF fusion chamber covered in plasma guns' },
+          media: { src: 'maxrobotics-sim.jpg', small: true, alt: 'Simulation of a 6-DOF robotic arm on a rail beside a PJMIF fusion chamber covered in plasma guns' },
         },
         {
           type: 'card', logo: 'Bonfiglioli logo',
@@ -451,7 +451,7 @@
     card.appendChild(head);
 
     if (b.media && b.media.src) {
-      const img = h('img', 'card-media' + (b.media.fit ? ' fit' : ''));
+      const img = h('img', 'card-media' + (b.media.fit ? ' fit' : '') + (b.media.small ? ' small' : ''));
       img.src = `assets/media/${b.media.src}`;
       img.alt = b.media.alt;
       card.appendChild(img);

@@ -387,6 +387,12 @@ img.card-media {
 }
 
 /* product shots on white: cap the height and let the white fill the sides */
+/* screenshots that don't need the full card width */
+img.card-media.small {
+  width: 65%;
+  margin-inline: auto;
+}
+
 img.card-media.fit {
   max-height: 300px;
   object-fit: contain;
@@ -634,6 +640,7 @@ img.card-media.fit {
 .bubble.show { transform: translate(-50%, -12px) scale(1); }
 
 @media (max-width: 700px) {
+  img.card-media.small { width: 100%; }
   .section-header { padding-top: 18px; }
   .card { font-size: 20px; padding: 18px; }
   .card-head { flex-wrap: wrap; }
