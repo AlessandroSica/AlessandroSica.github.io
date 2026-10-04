@@ -378,6 +378,21 @@ html { cursor: crosshair; }
 
 .card-medal { flex: none; }
 
+img.card-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 16px 0 4px;
+  border: 3px solid #6b6385;
+}
+
+/* product shots on white: cap the height and let the white fill the sides */
+img.card-media.fit {
+  max-height: 300px;
+  object-fit: contain;
+  background: #fff;
+}
+
 .card-media.placeholder {
   margin: 16px 0 4px;
   height: 180px;

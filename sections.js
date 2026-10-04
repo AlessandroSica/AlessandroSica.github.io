@@ -365,7 +365,7 @@
             'Simulating {{two coordinated 6-DOF robotic manipulators|Two arms, one rail!}} on rails for automated exchange of plasma guns in a {{digital twin|Digital twin!}} of a {{Plasma-Jet-Driven Magneto-Inertial Fusion|FUSION?!}} (PJMIF) chamber.',
             'Focusing on {{motion coordination|Coordinating...}}, task exchange and {{safe planning|No collisions!}} for arms sharing a workspace.',
           ],
-          media: 'Screenshot of the dual-arm simulation',
+          media: { src: 'maxrobotics-sim.jpg', alt: 'Simulation of a 6-DOF robotic arm on a rail beside a PJMIF fusion chamber covered in plasma guns' },
         },
         {
           type: 'card', logo: 'Bonfiglioli logo',
@@ -375,6 +375,7 @@
             'Worked with a {{Laser Guided Vehicle|LGV coming through!}} for {{autonomous pallet transport|Pallet delivered!}}, troubleshooting issues and optimising its integration in the factory workflow.',
             'Analysed proposed transport paths and contributed to technical reports.',
           ],
+          media: { src: 'bonfiglioli-lgv.jpg', alt: 'Toyota laser guided vehicle (autonomous pallet truck) with its navigation laser mast', fit: true },
         },
         {
           type: 'card', logo: 'Cubbit logo',
@@ -449,7 +450,13 @@
     if (b.date) head.appendChild(h('div', 'card-meta', `${esc(b.date)}<br>${esc(b.place || '')}`));
     card.appendChild(head);
 
-    if (b.media) card.appendChild(h('div', 'card-media placeholder', `IMAGE PLACEHOLDER<br><small>${esc(b.media)}</small>`));
+    if (b.media && b.media.src) {
+      const img = h('img', 'card-media' + (b.media.fit ? ' fit' : ''));
+      img.src = `assets/media/${b.media.src}`;
+      img.alt = b.media.alt;
+      img.loading = 'lazy';
+      card.appendChild(img);
+    } else if (b.media) card.appendChild(h('div', 'card-media placeholder', `IMAGE PLACEHOLDER<br><small>${esc(b.media)}</small>`));
 
     if (b.bullets) {
       const ul = h('ul');
