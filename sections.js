@@ -257,7 +257,13 @@
             'Validated in PyBullet across {{1,800 paired trials|1,800 trials!}}: {{shorter paths in all nine conditions|Shorter every time!}} and {{up to 11.5 percentage points|+11.5 pp success!}} higher success rate, with ongoing validation on a {{PiPER manipulator|PiPER arm on duty}} with LiDAR and force sensing.',
             'Aiming to submit the work to {{IROS 2027|Next stop: IROS!}}.',
           ],
-          links: [{ label: 'Paper (coming soon)', href: null }, { label: 'GitHub', href: null }],
+          links: [
+            { label: 'Thesis', href: 'https://drive.google.com/file/d/1H5fEEHGqkO6gmYOJ12yE6cuEjVTnWrGk/view?usp=sharing' },
+            { label: 'Video', href: 'https://canva.link/aejz8yloep58nog' },
+            { label: 'Presentation', href: 'https://canva.link/47wnarj7axk53fi' },
+            { label: 'Paper (coming soon)', href: null },
+            { label: 'GitHub', href: null },
+          ],
         },
         { type: 'sim', title: 'Live demo: contact-aware navigation' },
         {
