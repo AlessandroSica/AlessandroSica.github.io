@@ -393,6 +393,7 @@
             'Machenta’s {{first and only Student Ambassador|The one and only!}}, based at ETH Zürich, bringing its {{Instant Robot Learning|Robots learn instantly!}} model to the local robotics ecosystem.',
             'Acting as {{technical go-to-market|Go-to-market!}}: connecting the company with ETH labs, student robotics teams and Zürich startups, spreading adoption of the product, and organising Machenta {{events and hackathons|Hackathon time!}}.',
           ],
+          media: { src: 'machenta-robot.jpg', alt: 'A robot arm reaching towards a person’s hand, silhouetted against an orange light' },
           links: [{ label: 'Machenta', href: 'https://machenta.com/' }],
         },
         {
