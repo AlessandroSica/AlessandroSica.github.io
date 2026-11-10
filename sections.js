@@ -24,6 +24,8 @@
     'Maximum Robotics logo': { src: 'maxrobotics', framed: true },
     'Bonfiglioli logo': { src: 'bonfiglioli', framed: true },
     'Cubbit logo': { src: 'cubbit', framed: true },
+    'ESRA logo': { src: 'esra', framed: true },
+    'Machenta logo': { src: 'machenta', framed: true },
   };
 
   // ---------- extra props ----------
@@ -168,7 +170,7 @@
         },
         {
           type: 'chart', title: 'Yearly average',
-          bars: [['Year 1', 92, 'Top 4%'], ['Year 2', 84, 'Top 5%'], ['Year 3', 80, 'Top 4%'], ['Final', 81, 'First Class']],
+          bars: [['Year 1', 92, 'Top 2%'], ['Year 2', 84, 'Top 5%'], ['Year 3', 80, 'Top 4%'], ['Final', 81, 'First Class']],
         },
         {
           type: 'tags', title: 'Relevant courses',
@@ -251,7 +253,7 @@
           sub: 'A Contact-Aware Navigation Framework with Online Traversability Reasoning in Unknown Cluttered Environments',
           date: 'Sep 2025 – Present', place: 'The University of Manchester',
           bullets: [
-            'Dissertation Grade: {{86/100|Graded 86!}}.',
+            'Dissertation Grade: {{86/100|Graded 86!}}, now continued as research at the School of Engineering.',
             'A contact-aware 2D navigation framework that lets robots navigate unknown, cluttered environments by {{safely interacting with compliant obstacles|Push through the soft stuff!}} to reach a goal.',
             'LiDAR-based incremental {{occupancy-grid mapping|Mapping...}} and {{frontier-based exploration|New frontier!}} with online {{A* path planning|A* found a path!}}, a custom cost function for dynamic target selection, and a contact-aware decision layer that exploits inferred traversability.',
             'Validated in PyBullet across {{1,800 paired trials|1,800 trials!}}: {{shorter paths in all nine conditions|Shorter every time!}} and {{up to 11.5 percentage points|+11.5 pp success!}} higher success rate, with ongoing validation on a {{PiPER manipulator|PiPER arm on duty}} with LiDAR and force sensing.',
@@ -287,6 +289,16 @@
       floaters: ['microphone', 'book', 'robotArm'],
       quips: ['Meeting at 6!', 'Who brought snacks?', 'Join the society!'],
       blocks: [
+        {
+          type: 'card', wide: true, logo: 'ESRA logo',
+          title: 'Hackathon Manager, Events Team',
+          sub: 'ESRA – European Student Robotics Association', date: 'Oct 2026 – Present', place: 'Zürich, Switzerland',
+          bullets: [
+            'Main organiser of the {{European Robotics House (ERH) Physical AI Hackathon|Physical AI hackathon!}} (Zürich, Oct 2026), run with the EuroTech Federation: {{50 participants|50 hackers!}}, {{30 hours on real robot hardware|30 hours of real robots!}}, three industry challenge tracks.',
+            'Coordinating hackathons with ESRA’s {{member robotics clubs across Europe|Clubs all over Europe!}} and planning joint activities between them and ERH.',
+          ],
+          links: [{ label: 'ESRA', href: 'https://www.studentrobotics.eu/' }],
+        },
         {
           type: 'card', wide: true,
           logo: 'RoboSoc logo',
@@ -338,14 +350,14 @@
           type: 'card', wide: true, medal: 'medalGold',
           title: 'EUROPE EMBODIED Hackathon – 1st Place Overall',
           sub: 'ESRA, RoboTUM, START Munich & TUM International', date: 'Jun 2026', place: 'Munich, Germany',
-          bullets: ['Won the {{Intel Industrial Robotics Arm Challenge|Track winners!}} and {{1st place overall|FIRST PLACE!}} with team RoBoost (3 members), out of {{350+ applicants|Beat 350+!}}, earning {{€2000 in cash|€2000!}} and €5000 in Claude credits.'],
+          bullets: ['Won the {{Intel Industrial Robotics Arm Challenge|Track winners!}} and {{1st place overall|FIRST PLACE!}} with team RoBoost (3 members), out of {{350+ applicants|Beat 350+!}} and 100 selected participants, earning {{€2000 in cash|€2000!}} and €5000 in Claude credits.'],
           links: [{ label: 'Announcement', href: 'https://www.linkedin.com/posts/europe-embodied_hmi2market-eiturbanmobility-eithei-activity-7477254590359310336-mbpZ' }],
         },
         {
           type: 'card', medal: 'medalGold',
           title: 'Outstanding Contribution to Developing Student Community Prize',
           sub: 'The University of Manchester, School of Engineering', date: 'Jul 2026', place: 'Manchester, UK',
-          bullets: ['Awarded to {{a single student|Only one winner!}} across the School of Engineering for 2025/26.'],
+          bullets: ['Awarded to {{a single student|Only one winner!}} across the School of Engineering for 2025/26, for deep involvement with university societies and schemes.'],
         },
         {
           type: 'card', medal: 'medalGold',
@@ -369,10 +381,20 @@
     },
 
     work: {
-      population: { kind: 'builder', name: 'builder bots', count: 3 },
+      population: { kind: 'builder', name: 'builder bots', count: 4 },
       floaters: ['work', 'gear', 'gear', 'robotArm'],
       quips: ['Safety first!', 'Clocking in', 'Hard hats on!'],
       blocks: [
+        {
+          type: 'card', wide: true, logo: 'Machenta logo',
+          title: 'Student Ambassador – Machenta',
+          sub: 'Imperial College London spin-out, $40M seed, Instant Robot Learning', date: 'Oct 2026 – Present', place: 'Zürich, Switzerland',
+          bullets: [
+            'Machenta’s {{first and only Student Ambassador|The one and only!}}, based at ETH Zürich, bringing its {{Instant Robot Learning|Robots learn instantly!}} model to the local robotics ecosystem.',
+            'Acting as {{technical go-to-market|Go-to-market!}}: connecting the company with ETH labs, student robotics teams and Zürich startups, spreading adoption of the product, and organising Machenta {{events and hackathons|Hackathon time!}}.',
+          ],
+          links: [{ label: 'Machenta', href: 'https://machenta.com/' }],
+        },
         {
           type: 'card', wide: true, logo: 'Maximum Robotics logo',
           title: 'Robotics Intern – Maximum Robotics',
@@ -389,7 +411,7 @@
           sub: 'Gearbox & drive systems manufacturer', date: 'Jun 2024 – Aug 2024', place: 'Bologna, Italy',
           bullets: [
             'Worked with a {{Laser Guided Vehicle|LGV coming through!}} for {{autonomous pallet transport|Pallet delivered!}}, troubleshooting issues and optimising its integration in the factory workflow.',
-            'Analysed proposed transport paths and contributed to technical reports.',
+            'Analysed proposed transport paths and contributed to technical reports and project discussions.',
           ],
           media: { src: 'bonfiglioli-lgv.jpg', alt: 'Toyota laser guided vehicle (autonomous pallet truck) with its navigation laser mast', fit: true },
         },
